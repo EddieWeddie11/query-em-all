@@ -1,4 +1,10 @@
 import { PokemonGeneration } from '../../models/pokemon.ts'
+import { useQuery } from '@tanstack/react-query-devtools'
+import { fetchPokemonGeneration } from '../apis/pokemon.ts'
+
+function GetPokemonName() {
+const { data: pokemonNames, error, isLoading } = useQuery({ queryKey: ['pokemonNames'], queryFn: fetchPokemonGeneration})
+}
 
 export default function PokemonList() {
   return (
