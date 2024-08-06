@@ -1,5 +1,5 @@
 import { PokemonGeneration } from '../../models/pokemon.ts'
-import { useQuery } from '@tanstack/react-query-devtools'
+import { useQuery } from '@tanstack/react-query'
 import { fetchPokemonGeneration } from '../apis/pokemon.ts'
 
 // function GetPokemonName() {
