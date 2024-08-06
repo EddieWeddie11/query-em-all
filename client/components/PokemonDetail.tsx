@@ -1,15 +1,18 @@
 import { useParams } from 'react-router-dom'
-import { Pokemon } from '../../models/pokemon.ts'
 import { useQuery } from '@tanstack/react-query'
 import { fetchPokemonByName } from '../apis/pokemon.ts'
 
-// const pokename: string = 'bulbasaur'
-
 export default function PokemonDetail() {
   const { name } = useParams()
-  const { isError, error, isPending, data } = useQuery({
-    queryKey: ['pokemonDetail'],
-    queryFn: () => fetchPokemonByName('bulbasaur'),
+  const pokemonName = name as string //need to review/understand why we are using 'as string'
+  const {
+    isError,
+    error,
+    isPending,
+    data: pokemon,
+  } = useQuery({
+    queryKey: ['pokemonDetail', pokemonName],
+    queryFn: () => fetchPokemonByName(pokemonName),
   })
 
   if (isPending) {
@@ -19,8 +22,6 @@ export default function PokemonDetail() {
   if (isError) {
     return error.message
   }
-
-  const pokemon = data
 
   return (
     <div>
