@@ -1,8 +1,24 @@
 import { useParams } from 'react-router-dom'
 import { Pokemon } from '../../models/pokemon.ts'
+import { useQuery } from '@tanstack/react-query'
+import { fetchPokemonByName } from '../apis/pokemon.ts'
 
 export default function PokemonDetail() {
   const { name } = useParams()
+  const { isError, error, isPending, data } = useQuery({
+    queryKey: ['pokemonDetail'],
+    queryFn: () => fetchPokemonByName('bulbasaur'),
+  })
+
+  if (isPending) {
+    return <p>Loading....</p>
+  }
+
+  if (isError) {
+    return error.message
+  }
+
+  const pokemon = data
 
   return (
     <div>
@@ -31,61 +47,61 @@ export default function PokemonDetail() {
   )
 }
 
-const pokemon: Pokemon = {
-  id: 1,
-  name: 'bulbasaur',
-  sprites: {
-    front_default:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-    back_default:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png',
-  },
-  abilities: [
-    {
-      ability: {
-        name: 'overgrow',
-        url: 'https://pokeapi.co/api/v2/ability/65/',
-      },
-      is_hidden: false,
-      slot: 1,
-    },
-    {
-      ability: {
-        name: 'chlorophyll',
-        url: 'https://pokeapi.co/api/v2/ability/34/',
-      },
-      is_hidden: true,
-      slot: 3,
-    },
-  ],
-  moves: [
-    {
-      move: {
-        name: 'razor-wind',
-        url: 'https://pokeapi.co/api/v2/move/13/',
-      },
-    },
-    {
-      move: {
-        name: 'swords-dance',
-        url: 'https://pokeapi.co/api/v2/move/14/',
-      },
-    },
-  ],
-  types: [
-    {
-      slot: 0,
-      type: {
-        name: 'grass',
-        url: 'https://pokeapi.co/api/v2/type/12/',
-      },
-    },
-    {
-      slot: 1,
-      type: {
-        name: 'poison',
-        url: 'https://pokeapi.co/api/v2/type/4/',
-      },
-    },
-  ],
-}
+// const pokemon: Pokemon = {
+//   id: 1,
+//   name: 'bulbasaur',
+//   sprites: {
+//     front_default:
+//       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+//     back_default:
+//       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png',
+//   },
+//   abilities: [
+//     {
+//       ability: {
+//         name: 'overgrow',
+//         url: 'https://pokeapi.co/api/v2/ability/65/',
+//       },
+//       is_hidden: false,
+//       slot: 1,
+//     },
+//     {
+//       ability: {
+//         name: 'chlorophyll',
+//         url: 'https://pokeapi.co/api/v2/ability/34/',
+//       },
+//       is_hidden: true,
+//       slot: 3,
+//     },
+//   ],
+//   moves: [
+//     {
+//       move: {
+//         name: 'razor-wind',
+//         url: 'https://pokeapi.co/api/v2/move/13/',
+//       },
+//     },
+//     {
+//       move: {
+//         name: 'swords-dance',
+//         url: 'https://pokeapi.co/api/v2/move/14/',
+//       },
+//     },
+//   ],
+//   types: [
+//     {
+//       slot: 0,
+//       type: {
+//         name: 'grass',
+//         url: 'https://pokeapi.co/api/v2/type/12/',
+//       },
+//     },
+//     {
+//       slot: 1,
+//       type: {
+//         name: 'poison',
+//         url: 'https://pokeapi.co/api/v2/type/4/',
+//       },
+//     },
+//   ],
+// }
