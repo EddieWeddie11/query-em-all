@@ -3,11 +3,13 @@ import { Pokemon } from '../../models/pokemon.ts'
 import { useQuery } from '@tanstack/react-query'
 import { fetchPokemonByName } from '../apis/pokemon.ts'
 
+const pokename: string = 'bulbasaur'
+
 export default function PokemonDetail() {
   const { name } = useParams()
   const { isError, error, isPending, data } = useQuery({
-    queryKey: ['pokemonDetail'],
-    queryFn: () => fetchPokemonByName('bulbasaur'),
+    queryKey: ['pokemonDetail', pokename],
+    queryFn: () => fetchPokemonByName(pokename),
   })
 
   if (isPending) {

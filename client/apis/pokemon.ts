@@ -9,7 +9,7 @@ export async function fetchPokemonGeneration(generation: number) {
   return res.body as PokemonGeneration
 }
 
-export async function fetchPokemonByName(name: string) {
+export async function fetchPokemonByName(name: string | undefined, String: StringConstructor, name: string) {
   const res = await request.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
   return res.body as Pokemon
 }
