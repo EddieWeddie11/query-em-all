@@ -25,10 +25,31 @@ export interface Pokemon {
   sprites: {
     front_default: string
     back_default: string
+    front_shiny: string
+    back_shiny: string
+    other: Other
   }
+
   abilities: Array<Ability>
   moves: Array<Move>
   types: Array<TypeInfo>
+}
+
+export interface Other {
+  showdown: Sprites
+}
+
+export interface Sprites {
+  back_default: string
+  back_female: null
+  back_shiny: string
+  back_shiny_female: null
+  front_default: string
+  front_female: null
+  front_shiny: string
+  front_shiny_female: null
+  other?: Other
+  animated?: Sprites
 }
 
 interface Ability {

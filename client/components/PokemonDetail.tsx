@@ -31,7 +31,19 @@ export default function PokemonDetail() {
         <p key={slot}>{type.name}</p>
       ))}
       <img
-        src={pokemon.sprites.front_default}
+        src={pokemon.sprites.other.showdown.front_default}
+        alt={`Front Default Sprite for ${pokemon.name}`}
+      />
+      <img
+        src={pokemon.sprites.other.showdown.front_shiny}
+        alt={`Front Default Sprite for ${pokemon.name}`}
+      />
+      <img
+        src={pokemon.sprites.other.showdown.back_default}
+        alt={`Front Default Sprite for ${pokemon.name}`}
+      />
+      <img
+        src={pokemon.sprites.other.showdown.back_shiny}
         alt={`Front Default Sprite for ${pokemon.name}`}
       />
       <section>
@@ -49,7 +61,7 @@ export default function PokemonDetail() {
     </div>
   )
 }
-
+console.log(PokemonDetail)
 // const pokemon: Pokemon = {
 //   id: 1,
 //   name: 'bulbasaur',
